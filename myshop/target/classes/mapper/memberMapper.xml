@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mem">
+	<select id="select" parameterType="dto2" resultMap="resMap">
+		select * from member where memeber_num = #{member_num}
+	</select>
+	<select id="selectAll" resultMap="resMap">
+		select * from member
+	</select>
+	<resultMap type="dto2" id="resMap">
+		<result property="member_name" column="name"/>
+		<result property="member_rnum" column="rnum"/>
+		<result property="member_id" column="id"/>
+		<result property="member_pw" column="pw"/>
+		<result property="member_addr" column="addr"/>
+		<result property="member_tel" column="tel"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="dto2">
+		insert into member values (NULL,#{member_name}, #{member_rnum}, #{member_id}, #{member_pw}, #{member_addr}, #{member_tel}, now())
+	</insert>
+	<update id="update" parameterType="dto2">
+		update member set member_pw = #{member_pw} where id = #{member_num}
+		update member set mebmer_addr = #{member_addr} where id = #{member_num}
+		update member set member_tel = #{member_tel} where id = #{member_num}
+	</update>	
+	<delete id="delete" parameterType="dto2">
+		delete from member where member_num = #{member_num}
+	</delete>
+</mapper>
